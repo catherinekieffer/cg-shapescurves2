@@ -56,7 +56,8 @@ class Renderer {
         
         // Following line is example of drawing a single line
         // (this should be removed after you implement the curve)
-        this.drawLine({x: 100, y: 100}, {x: 600, y: 300}, [255, 0, 0, 255], framebuffer);
+        // this.drawLine({x: 100, y: 100}, {x: 600, y: 300}, [255, 0, 0, 255], framebuffer);
+        this.drawBezierCurve({x: 100, y: 100}, {x: 150, y: 300}, {x: 350, y: 300}, {x: 300, y: 100}, 4, [255, 0, 0, 255], framebuffer);
     }
 
     // framebuffer:  canvas ctx image data
@@ -101,7 +102,24 @@ class Renderer {
     drawBezierCurve(p0, p1, p2, p3, num_edges, color, framebuffer) {
         // TODO: draw a sequence of straight lines to approximate a Bezier curve
         
-        
+        // this.drawLine(p0, p3, color, framebuffer)
+
+        let start = p0;
+        console.log(start);
+        // let end = p3;
+        let x;
+        let y;
+        for (let t = 0; t <= 1; t = t + 1/num_edges) {
+            x = Math.pow((1-t), 3) * p0.x + 3 * Math.pow((1-t), 2) * t*p1.x + 3*(1-t)*Math.pow(t, 2)*p2.x + Math.pow(t, 3)*p3.x;
+            y = Math.pow((1-t), 3) * p0.y + 3 * Math.pow((1-t), 2) * t*p1.y + 3*(1-t)*Math.pow(t, 2)*p2.y + Math.pow(t, 3)*p3.y;
+            // this.drawLine({x: 100, y: 100}, {x: 600, y: 300}, [255, 0, 0, 255], framebuffer);
+            this.drawLine(start, {x:x, y:y}, color, framebuffer);
+
+            start = {x:x, y:y}; //I want to save start here so that the next point is drawn from the start to the next curve....
+            console.log(start);
+
+        }
+
     }
 
     // center:       object {x: __, y: __}
