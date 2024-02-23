@@ -49,47 +49,94 @@ class Renderer {
 
     // framebuffer:  canvas ctx image data
     drawSlide0(framebuffer) {
-        // TODO: draw at least 2 Bezier curves
-        //   - variable `this.num_curve_sections` should be used for `num_edges`
-        //   - variable `this.show_points` should be used to determine whether or not to render vertices
-        
-        
-        // Following line is example of drawing a single line
-        // (this should be removed after you implement the curve)
-        // this.drawLine({x: 100, y: 100}, {x: 600, y: 300}, [255, 0, 0, 255], framebuffer);
-        this.drawBezierCurve({x: 100, y: 100}, {x: 150, y: 300}, {x: 350, y: 300}, {x: 300, y: 100}, 4, [255, 0, 0, 255], framebuffer);
+        let color = [150, 16, 125, 255];
+        this.drawBezierCurve({x: 100, y: 100}, {x:150, y: 300}, {x: 350, y: 300}, {x: 300, y: 100}, this.num_curve_sections, color, framebuffer);
+        this.drawBezierCurve({x: 600, y: 100}, {x: 600, y: 500}, {x: 400, y: 500}, {x: 300, y: 500}, this.num_curve_sections, color, framebuffer);
     }
 
     // framebuffer:  canvas ctx image data
     drawSlide1(framebuffer) {
-        // TODO: draw at least 2 circles
-        //   - variable `this.num_curve_sections` should be used for `num_edges`
-        //   - variable `this.show_points` should be used to determine whether or not to render vertices
-        
-        
+        let color = [153, 151, 47, 255];
+        this.drawCircle({x: 150, y: 150}, 50, this.num_curve_sections, color, framebuffer);  
+        this.drawCircle({x: 400, y: 350}, 200, this.num_curve_sections, color, framebuffer);
     }
 
     // framebuffer:  canvas ctx image data
     drawSlide2(framebuffer) {
-        // TODO: draw at least 2 convex polygons (each with a different number of vertices >= 5)
-        //   - variable `this.show_points` should be used to determine whether or not to render vertices
-        
-        
-        // Following lines are example of drawing a single triangle
-        // (this should be removed after you implement the polygon)
-        let point_a = {x:  80, y:  40};
-        let point_b = {x: 320, y: 160};
-        let point_c = {x: 240, y: 360};
-        this.drawTriangle(point_a, point_c, point_b, [0, 128, 128, 255], framebuffer);
+        let color = [72, 153, 219, 255];
+        this.drawConvexPolygon([{x: 50, y: 100}, {x: 100, y: 300}, {x: 200, y: 200}, {x: 250, y: 50},{x: 250, y: 0}], color, framebuffer)
+        this.drawConvexPolygon([{x: 300, y: 400}, {x: 200, y: 450}, {x: 400, y: 200}, {x: 400, y: 100},{x: 550, y: 0},{x: 600, y: 400},{x: 400, y: 450}], color, framebuffer)
     }
 
     // framebuffer:  canvas ctx image data
     drawSlide3(framebuffer) {
-        // TODO: draw your name!
-        //   - variable `this.num_curve_sections` should be used for `num_edges`
-        //   - variable `this.show_points` should be used to determine whether or not to render vertices
+        let color = [63, 234, 208, 255];
         
-        
+        // C
+        this.drawBezierCurve({x: 70, y: 200}, {x: 25, y: 250}, {x: 25, y: 350}, {x: 70, y: 400}, this.num_curve_sections, color, framebuffer);
+        this.drawBezierCurve({x: 70, y: 200}, {x: 100, y: 180}, {x: 120, y: 200}, {x: 130, y: 225}, this.num_curve_sections, color, framebuffer);
+        this.drawBezierCurve({x: 70, y: 400}, {x: 90, y: 410}, {x: 115, y: 395}, {x: 130, y: 350}, this.num_curve_sections, color, framebuffer);
+        // a
+        this.drawCircle({x: 170, y: 220}, 30, this.num_curve_sections, color, framebuffer);
+        if (this.show_points) {
+            this.drawVertex({x: 200, y: 190}, color, framebuffer)
+            this.drawVertex({x: 200, y: 240}, color, framebuffer)
+        }
+        this.drawLine({x: 200, y: 190}, {x: 200, y: 240}, color, framebuffer);
+        //t
+        if (this.show_points) {
+            this.drawVertex({x: 230, y: 190}, color, framebuffer)
+            this.drawVertex({x: 230, y: 260}, color, framebuffer)
+            this.drawVertex({x: 210, y: 240}, color, framebuffer)
+            this.drawVertex({x: 250, y: 240}, color, framebuffer)
+        }
+        this.drawLine({x: 230, y: 190}, {x: 230, y: 260}, color, framebuffer);
+        this.drawLine({x: 210, y: 240}, {x: 250, y: 240}, color, framebuffer);
+        //h
+        if (this.show_points) {
+            this.drawVertex({x: 260, y: 190}, color, framebuffer)
+            this.drawVertex({x: 260, y: 300}, color, framebuffer)
+        }
+        this.drawLine({x: 260, y: 190}, {x: 260, y: 300}, color, framebuffer);
+        this.drawBezierCurve({x: 260, y: 230}, {x: 300, y: 230}, {x: 280, y: 240}, {x: 290, y: 190}, this.num_curve_sections, color, framebuffer);
+        //e
+        this.drawConvexPolygon([{x: 300, y: 220}, {x: 320, y: 230}, {x: 330, y: 240}, {x: 320, y: 250},{x: 300, y: 240}], color, framebuffer);
+        this.drawBezierCurve({x: 300, y: 220}, {x: 300, y: 185}, {x: 320, y: 185}, {x: 330, y: 200}, this.num_curve_sections, color, framebuffer);
+        //r
+        if (this.show_points) {
+            this.drawVertex({x: 340, y: 190}, color, framebuffer)
+            this.drawVertex({x: 340, y: 260}, color, framebuffer)
+        }
+        this.drawLine({x: 340, y: 190}, {x: 340, y: 260}, color, framebuffer);
+        this.drawBezierCurve({x: 340, y: 250}, {x: 350, y: 260}, {x: 345, y: 260}, {x: 360, y: 250}, this.num_curve_sections, color, framebuffer);
+        //i
+        if (this.show_points) {
+            this.drawVertex({x: 370, y: 190}, color, framebuffer)
+            this.drawVertex({x: 370, y: 260}, color, framebuffer)
+        }
+        this.drawLine({x: 370, y: 190}, {x: 370, y: 260}, color, framebuffer);
+        this.drawCircle({x: 370, y: 280}, 3, this.num_curve_sections, color, framebuffer);
+        //n
+        if (this.show_points) {
+            this.drawVertex({x: 390, y: 190}, color, framebuffer)
+            this.drawVertex({x: 390, y: 260}, color, framebuffer)
+        }
+        this.drawLine({x: 390, y: 190}, {x: 390, y: 260}, color, framebuffer);
+        this.drawBezierCurve({x: 390, y: 240}, {x: 410, y: 260}, {x: 430, y: 260}, {x: 420, y: 190}, this.num_curve_sections, color, framebuffer);
+        //e
+        this.drawConvexPolygon([{x: 440, y: 220}, {x: 460, y: 230}, {x: 470, y: 240}, {x: 460, y: 250}, {x: 440, y: 240}], color, framebuffer);
+        this.drawBezierCurve({x: 440, y: 220}, {x: 440, y: 185}, {x: 460, y: 185}, {x: 470, y: 200}, this.num_curve_sections, color, framebuffer);
+    
+        // smiley face! 
+        if (this.show_points) {
+            this.drawVertex({x: 565, y: 300}, color, framebuffer)
+            this.drawVertex({x: 565, y: 360}, color, framebuffer)
+            this.drawVertex({x: 635, y: 300}, color, framebuffer)
+            this.drawVertex({x: 635, y: 360}, color, framebuffer)
+        }
+        this.drawLine({x: 565, y: 300}, {x: 565, y: 360}, color, framebuffer);
+        this.drawLine({x: 635, y: 300}, {x: 635, y: 360}, color, framebuffer);
+        this.drawBezierCurve({x: 540, y: 260}, {x: 570, y: 185}, {x: 630, y: 185}, {x: 660, y: 260}, this.num_curve_sections, color, framebuffer);
     }
 
     // p0:           object {x: __, y: __}
@@ -100,24 +147,21 @@ class Renderer {
     // color:        array of int [R, G, B, A]
     // framebuffer:  canvas ctx image data
     drawBezierCurve(p0, p1, p2, p3, num_edges, color, framebuffer) {
-        // TODO: draw a sequence of straight lines to approximate a Bezier curve
-        
-        // this.drawLine(p0, p3, color, framebuffer)
-
         let start = p0;
-        console.log(start);
-        // let end = p3;
+        if (this.show_points){
+            this.drawVertex(p1, [100, 100, 100, 255], framebuffer);
+            this.drawVertex(p2, [100, 100, 100, 255], framebuffer);
+        }
         let x;
         let y;
-        for (let t = 0; t <= 1; t = t + 1/num_edges) {
+        for (let t = 0; t <= 1.000001; t = t + 1/num_edges) {
             x = Math.pow((1-t), 3) * p0.x + 3 * Math.pow((1-t), 2) * t*p1.x + 3*(1-t)*Math.pow(t, 2)*p2.x + Math.pow(t, 3)*p3.x;
             y = Math.pow((1-t), 3) * p0.y + 3 * Math.pow((1-t), 2) * t*p1.y + 3*(1-t)*Math.pow(t, 2)*p2.y + Math.pow(t, 3)*p3.y;
-            // this.drawLine({x: 100, y: 100}, {x: 600, y: 300}, [255, 0, 0, 255], framebuffer);
-            this.drawLine(start, {x:x, y:y}, color, framebuffer);
-
-            start = {x:x, y:y}; //I want to save start here so that the next point is drawn from the start to the next curve....
-            console.log(start);
-
+            this.drawLine(start, {x:Math.round(x), y:Math.round(y)}, color, framebuffer);
+            if (this.show_points){
+                this.drawVertex({x:Math.round(x), y:Math.round(y)}, color, framebuffer);
+            }
+            start = {x:Math.round(x), y:Math.round(y)}; //I want to save start here so that the next point is drawn from the start to the next curve....
         }
 
     }
@@ -128,27 +172,43 @@ class Renderer {
     // color:        array of int [R, G, B, A]
     // framebuffer:  canvas ctx image data
     drawCircle(center, radius, num_edges, color, framebuffer) {
-        // TODO: draw a sequence of straight lines to approximate a circle
-        
-        
+        let x;
+        let y;
+        let start = {x: center.x+radius, y: center.y};
+        let epsilon = .00001
+        for (let t = 0; t <= 2*Math.PI+epsilon; t = t+(2*Math.PI/num_edges)) {
+            x = center.x + radius *  Math.cos(t);
+            y = center.y + radius *  Math.sin(t);
+            this.drawLine(start, {x:Math.round(x), y:Math.round(y)}, color, framebuffer);
+            if (this.show_points){
+                this.drawVertex({x:Math.round(x), y:Math.round(y)}, color, framebuffer);
+            }            
+            start = {x:Math.round(x), y:Math.round(y)};
+        }
     }
     
     // vertex_list:  array of object [{x: __, y: __}, {x: __, y: __}, ..., {x: __, y: __}]
     // color:        array of int [R, G, B, A]
     // framebuffer:  canvas ctx image data
     drawConvexPolygon(vertex_list, color, framebuffer) {
-        // TODO: draw a sequence of triangles to form a convex polygon
-        
-        
+        if (this.show_points){
+            this.drawVertex(vertex_list[0], color, framebuffer);
+            this.drawVertex(vertex_list[1], color, framebuffer);
+        }
+        for (let i = 1; i< vertex_list.length-1; i++) {
+            this.drawTriangle(vertex_list[0],vertex_list[i],vertex_list[i+1], color, framebuffer)
+            if (this.show_points){
+                this.drawVertex(vertex_list[i+1], color, framebuffer);
+            } 
+        }
     }
     
     // v:            object {x: __, y: __}
     // color:        array of int [R, G, B, A]
     // framebuffer:  canvas ctx image data
     drawVertex(v, color, framebuffer) {
-        // TODO: draw some symbol (e.g. small rectangle, two lines forming an X, ...) centered at position `v`
-        
-        
+        this.drawLine({x: v.x-4, y: v.y-4}, {x:v.x+4, y:v.y+4}, color, framebuffer);
+        this.drawLine({x: v.x+4, y: v.y-4}, {x: v.x-4, y: v.y+4}, color, framebuffer);        
     }
     
     /***************************************************************
